@@ -706,10 +706,13 @@
 			for (let i = 0; i < posicao.length; i++) {
 				medidasTendeciaNominal.innerHTML += `Mediana: ${posicao[i]} <br>`
 			}
+			if(maior.length == acum){
+				medidasTendeciaNominal.innerHTML +="Moda: Não Existe"
+			}else{
 			for (let i = 0; i < maior.length; i++) {
 				medidasTendeciaNominal.innerHTML += `Moda: ${maior[i]}<br>`
 			}
-
+			}
 			var color = []
 			for (let i = 0; i < indiceNominal.length; i++) {
 				let r = Math.floor(Math.random() * 255),
