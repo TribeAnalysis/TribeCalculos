@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style type="text/css">
+		.graficos {
+			width: 300px;
+			height: 300px;
+		}
+	</style>
+	<link rel="shortcut icon" type="image/x-icon" href="./favicon.ico">
+	<script src="https://d3js.org/d3.v4.min.js"></script>
+	<script src="chart.js"></script>
+	<meta charset="utf-8">
+	<title></title>
+
+</head>
+
+<body>
+	<div>
+		<h1>Probabilidade </h1>
+		<select id="tiposProbabilidades" onclick="tipoProbabilidade()">
+			<!-- <option value="0">Distribuição Normal</option> -->
+			<option value="1">Distribuição Binominal</option>
+			<!-- <option value="2">Distribuição Uniforme</option> -->
+		</select><br>
+		<div id="probabilidades">
+			<input id="amostra" type="number" placeholder="Tamanho da Amostra"> <br>
+			<input type="number" id="sucesso" placeholder="Probabilidade sucesso"> <br>
+			<input type="number" id="fracasso" placeholder="probabilidade fracasso"> <br>
+			<input type="string" id="evento" placeholder="evento separe por ;">
+		</div>
+	</div>
+	<button onclick="calc_Probabilidade()">Calcular </button>
+	<div id="medidas">
+
+	</div>
+	<hr>
+	<h1>Quantitativa Discreta</h1>
+	<div>
+		<p>Tabulação</p>
+		Nome da variavel <input type="text" name="" id="nomeVar">
+		<select name="AmosorPop" id='PopAmosDiscreta'>
+			<option value=0 id="cmbPopulacao"> POPULAÇÃO</option>
+			<option value=1 id="cmbAmostra"> AMOSTRA </option>
+
+		</select>
+	</div>
+
+	<div>
+		<h1>Entrada de dados </h1>
+		<p> <strong>Manual</strong> </p>
+		<input type="" name="" id="dados" placeholder="Insira os dados com: ;">
+	</div>
+	<div>
+		<p><strong>Automatica </strong></p>
+		<input type="file" />
+	</div><br>
+	<select id='medidaSeparatriz' name="medidaSeparatriz">
+		<option value=0 id='cmbnada'>separatrizes</option>
+		<option value=1 id='cmbQuartil'>Quartil</option>
+		<option value=2 id='cmbDecil'>Decil</option>
+		<option value=3 id='cmbQuintil'>Quintil</option>
+		<option value=4 id='cmbPercentil'>Percentil</option>
+	</select>
+	<div id="cmbSeparatriz">
+
+	</div>
+	<input type=" " value="" id="valorSeparatriz" placeholder="%">
+	<div>
+		<button onclick="calc_Qualitativa()" id="btn">Calcular</button> </div>
+	<div>
+
+		<table id="nome_quali_disc">
+			<tr><strong>
+					<h1></h1>
+				</strong></tr>
+		</table>
+		<table id="table_quali_disc" border="1">
+
+
+		</table>
+	</div>
+	<div id='medidasTendeciaDiscreta'>
+
+	</div>
+	<div class="graficos">
+		<canvas id="myChart" width="20" height="20"></canvas>
+	</div>
+
+	<hr />
+
+	<div>
+		<h1>Qualitativa Nominal & Qualitativa Ordinal </h1>
+
+		<div>
+			<p>Tabulação</p>
+			Nome da variavel <input type="text" name="" id="nomeVar_Nominal">
+			<select name="AmosorPop">
+				<option value="amostra" id="cmbAmostra"> AMOSTRA </option>
+				<option value="populacao" id="cmbPopulacao"> POPULAÇÃO</option>
+			</select>
+		</div>
+		<div>
+			<h1>Entrada de dados </h1>
+			<p> Manual </p>
+			<input type="" name="" id="dados_nominal" placeholder="Insira os dados separados por: ;">
+			<select name="qualitativas">
+				<option value="descritiva" id="cmbDescritiva"> ORDINAL </option>
+				<option value="nominal" id="cmbNominaL"> NOMINAL</option>
+			</select>
+		</div><br>
+		<div>
+			<input type="file" id="Nominal" />
+		</div><br>
+		<select id='medidaSeparatrizNominal' name="medidaSeparatriz">
+			<option value=0 id='cmbnada'>separatrizes</option>
+			<option value=1 id='cmbQuartil'>Quartil</option>
+			<option value=2 id='cmbDecil'>Decil</option>
+			<option value=3 id='cmbQuintil'>Quintil</option>
+			<option value=4 id='cmbPercentil'>Percentil</option>
+		</select>
+
+		<input type=" " value="" id="valorSeparatrizNominal" placeholder="%">
+
+		<div> <button onclick="calc_qualiNominal()" id="btn">Calcular</button> </div>
+		<div>
+			<table id="nomeVariavel">
+				<tr><strong>
+						<h1></h1>
+					</strong></tr>
+			</table>
+			<table id="table_Nominal" border="1">
+			</table>
+		</div>
+		<div id='medidasTendeciaNominal'>
+
+		</div>
+	</div>
+	<div class="graficos">
+		<canvas id="myChart2" width="20" height="20"></canvas>
+	</div>
+
+	<hr />
+
+	<div>
+		<h1>Quantitativa Continua </h1>
+		<div>
+			<p>Tabulação</p>
+			Nome da variavel <input type="text" name="" id="nomeVar_Continua">
+			<select name="AmosorPop" id="PopAmos">
+				<option value=0 id="cmbPopulacao"> POPULAÇÃO</option>
+				<option value=1 id="cmbAmostra"> AMOSTRA </option>
+			</select>
+		</div>
+		<h1>Entrada de dados </h1>
+		<p> Manual </p>
+		<input type="" name="" id="dados_continua" placeholder="Insira os dados separados por: ;">
+		<div>
+			<p><strong>Automatica </strong></p>
+			<input type="file" id="Continua" />
+		</div><br>
+	</div><br>
+	<select id='medidaSeparatrizContinua' name="medidaSeparatriz">
+		<option value=0 id='cmbnada'>separatrizes</option>
+		<option value=1 id='cmbQuartil'>Quartil</option>
+		<option value=2 id='cmbDecil'>Decil</option>
+		<option value=3 id='cmbQuintil'>Quintil</option>
+		<option value=4 id='cmbPercentil'>Percentil</option>
+	</select>
+
+	<input type=" " value="" id="valorSeparatrizContinua" placeholder="%">
+
+	<div> <button onclick="calc_continua()" id="btn">Calcular</button> </div>
+	<table id="nome_continua">
+		<tr>
+			<h1></h1>
+		</tr>
+	</table>
+	<table id="table_continua" border="1">
+	</table>
+	</div>
+	</div>
+	<div id='medidasTendeciaContinua'>
+
+	</div>
+	<div class="graficos">
+		<canvas id="myChart3" width="20" height="20"></canvas>
+	</div>
+	<hr>
+
+
+	<script>
+		const vetAuto = []
+		//const vetAutoNominal = []
+		const inputDiscreta = document.querySelector('input[type="file"]')
+		inputDiscreta.addEventListener('change', function (e) {
+			//console.log(input.files)
+			const reader = new FileReader()
+			reader.onload = function () {
+				const lines = reader.result.split('/n').map(function (line) {
+					return line.split(';')
+				})
+				console.log(lines)
+				for (let i = 0; i < lines.length; i++) {
+					vetAuto[i] = lines[i]
+
+				}
+				console.log(vetAuto)
+
+			}
+
+			reader.readAsText(inputDiscreta.files[0])
+		}, false)
+
+
+		const vetAutoNominal = []
+		const inputNominal = document.querySelector('input[type="file"][id="Nominal"]')
+		inputNominal.addEventListener('change', function (e) {
+			//console.log(input.files)
+			const readerNominal = new FileReader()
+			readerNominal.onload = function () {
+				const linesNominal = readerNominal.result.split('/n').map(function (line) {
+					return line.split(';')
+				})
+				//console.log(lines)
+				for (let i = 0; i < linesNominal.length; i++) {
+					vetAutoNominal[i] = linesNominal[i]
+
+				}
+				console.log(vetAutoNominal)
+
+			}
+
+			readerNominal.readAsText(inputNominal.files[0])
+		}, false)
+
+		const vetAutoContinua = []
+		const inputContinua = document.querySelector('input[type="file"][id="Continua"]')
+		inputContinua.addEventListener('change', function (e) {
+			//console.log(input.files)
+			const readerContinua = new FileReader()
+			readerContinua.onload = function () {
+				const linesContinua = readerContinua.result.split('/n').map(function (line) {
+					return line.split(';')
+				})
+				//console.log(lines)
+				for (let i = 0; i < linesContinua.length; i++) {
+					vetAutoContinua[i] = linesContinua[i]
+
+				}
+				console.log(vetAutoContinua)
+
+			}
+
+			readerContinua.readAsText(inputContinua.files[0])
+		}, false)
+		//-----------------------------------------------Probabilidade----------------------------------------------------//
+		//GOD LUCK MY FRIENDS!
+		function calc_Probabilidade() {
+			medidas.innerHTML = ' '
+			probabilidadeBinomial()
+		}
+		function probabilidadeBinomial(n, k, aux) {
+			var n = document.getElementById('amostra').value;
+			let p = document.getElementById('sucesso').value;
+			let q = document.getElementById("fracasso").value;
+			let k1 = document.getElementById('evento').value;
+			var k = k1.toString().split(';');
+			console.log(k)
+			let calc;
+			let vetCalc = []
+			let probabilidade = 0
+			let vetProbabilidade = []
+			let totProbabilidade = 0
+			for (let i = 0; i < k.length; i++) {
+				calc = (analiseCombinatoria(n) / (analiseCombinatoria(k[i]) * analiseCombinatoria(n - k[i]))).toFixed(2);
+				vetCalc.push(parseFloat(calc));
+				console.log(calc)
+				console.log(vetCalc)
+
+			}
+			// Calculando e somando as probabilidades dos múltiplos resultados
+			for (let i = 0; i < k.length; i++) {
+				console.log(k[i])
+				let probabilidade = ((vetCalc[i] * (p ** k[i]) * (q ** (n - k[i]))) * 100).toFixed(2);
+				vetProbabilidade.push(parseFloat(probabilidade));
+			} console.log(vetProbabilidade, probabilidade)
+			for (let i = 0; i < vetProbabilidade.length; i++) {
+				totProbabilidade += vetProbabilidade[i];
+			} console.log(totProbabilidade)
+			// Calculando Média
+			let media = n * p;
+			// Calculando Desvio Padrão
+			let desvioPadrao = Math.sqrt((n * p * q)).toFixed(2);
+			// Calculando CV
+			let cv = ((desvioPadrao / media) * 100).toFixed(2);
+			console.log(cv)
+			medidas.innerHTML += `Media:${media}<br>`
+			medidas.innerHTML += `Desvio Padrão: ${desvioPadrao}<br>`
+			medidas.innerHTML += `probabilidade:${totProbabilidade}`
+		}
+		function analiseCombinatoria(x) {
+
+			let fatorial = 1;
+			if (x < 0) {
+				return 0;
+			}
+			else if (x == 0) {
+				return 1;
+			}
+			else {
+				for (let i = 1; i <= x; i++) {
+					fatorial = fatorial * i
+				}
+			}
+			return fatorial
+		}
+
+		//-----------------------------------------------Fim Probabilidade----------------------------------------------------//
+		//GOD LUCK MY FRIENDS!
+		// -------------------------------------- Qualitativa ---------------------------------------------
+
+
+		function calc_Qualitativa() {
+			table_quali_disc.innerHTML = ""
+			nome_quali_disc.innerHTML = ''
+			medidasTendeciaDiscreta.innerHTML = ''
+			document.getElementById("myChart").innerHTML = ""
+			//let dados = document.getElementById('dados').value; //puxa os dados da pagina verificar se é nescessario
+			if (vetAuto.length === 0) {
+
+				discreta()
+			} else {
+				automaticaDiscreta()
+			}
+		}
+
+		function ordemCrescente(a, b) {
+			return (a - b)	// ordena de forma crescente
+		}
+		function automaticaDiscreta() {
+			let vetDiscreta = vetAuto.toString().split(',');
+			table_quali_disc.innerHTML += "<tr> <td>VARIAVEL</td><td>FI</td><td>FR%   </td><td>FAC   </td><td>FAC%  </td></tr> "
+			var value = document.getElementById('medidaSeparatriz').value;// pega qual medida separatriz sera consultada
+			var valorSeparatriz = document.getElementById('valorSeparatriz').value;//pega o valor da medida separatriz que ele quer pesquisae
+			var amostraQuestion = document.getElementById("PopAmosDiscreta").value;
+			var nomeVar = document.getElementById('nomeVar').value; //Coloca o nome da variavel
+			// var dados = document.getElementById('dados').value; //puxa os dados da pagina
+			// var vetDiscreta = dados.toString().split(';'); // separa os valores e insere no vetor
+			vetDiscreta.sort(ordemCrescente) // deixa o vetor na ordem crescente/alfabetica
+			var quantDados = {}; //obj com informando a quantidade de cada elemento 
+			var acum = 0; // acumulador de elementos diferentes
+
+			nome_quali_disc.innerHTML += nomeVar
+			for (let i = 0; i < vetDiscreta.length; i++) { //metodo para alocar a quantidade de cada elemento
+				if (quantDados[vetDiscreta[i]]) {
+					quantDados[vetDiscreta[i]] += 1
+					acum++
+
+				} else {
+					quantDados[vetDiscreta[i]] = 1
+					acum++
+
+				}
+			}
+			var porcentagem = (acum / 100) // valor de cada 1% sla pq mal usei ele
+			var facDiscreta = 0; // total de repetiçoes ate aquele momento fac
+			var acumFacDiscreta = 0; // acumulador da fac
+			var facTotPorcDisc = 0;// porcentagem total da fac
+			var facPorc = 0
+			//pega o valor da variavel 
+			var indiceDiscreta = [];
+			let totMedia = 0;  // valor total da media
+			var quant = 0// variavel para pegar o maior valor de repetiçoes no indice
+			//Pega a porcetagem do valor digitado
+			var porcFreqDiscreta = [];
+			var vetfac = []// vetor com todas os facs% 
+			var maior = []// vetor para pegar os maiores valores e fazer a moda
+			var estousemcriativadade = 0 // variavel p/ travar a busca de posicao na medida separatriz
+			let xiVariancia = []
+			let fiVariancia = []
+			for (var chave in quantDados) { // pega as variaveis
+				facDiscreta += quantDados[chave]
+				facPorc = Math.round((quantDados[chave] / acum) * 100) // calcula a porcentagem atual e nao sei pq nao o usei #vergonhadaprofision
+				facTotPorcDisc = facPorc + acumFacDiscreta
+				table_quali_disc.innerHTML += `<td> ${chave /*Inserção de variavel na tabela*/}  <td> ${quantDados[chave]/*Insere a quantidade de repetições da variavel*/} <td>${Math.round((quantDados[chave] / acum) * 100) /*Insere e calcula a porcentagem de vezes que o elemento foi inserido*/} % <td> ${facDiscreta}<td> ${facTotPorcDisc}<br> `
+				var Media = chave * quantDados[chave]
+				totMedia += Media  //adiciona o valor desse indice na media total
+				vetfac.push(facTotPorcDisc)//add fac% no vetor
+				fiVariancia.push(quantDados[chave])
+				acumFacDiscreta += facPorc
+				//Adiciona o indice ao vetor
+				indiceDiscreta.push(chave)
+				//adiciona a porcentagem ao vetor
+				porcFreqDiscreta.push(Math.round((quantDados[chave] / acum) * 100))
+				if (quant == quantDados[chave]) {//estrutura de selecao para descobrir se o indice atual é maior ou igual ao do vetor
+					//se for igual o adicionamos no vetor
+					quant = quantDados[chave]
+					// console.log(maior, chave)
+					maior.push(chave)
+				} else if (quant < quantDados[chave]) {
+					//senao excluimos o valor no vetor e adicionamos o novo valor
+					quant = quantDados[chave]
+					maior.pop()
+
+					maior.push(chave)
+					console.log(maior)
+				}
+				if (value == 2) {
+					// medida separatriz: Decil de 10 em 10% a posiçao é o total de elementos dividido por 100 + a quantidade de decil 
+					//que o usuario deseja encontrar, isso é valido para todas as medidas separatrizes
+
+					let posicao = (acum / 100) + (10 * valorSeparatriz)
+					for (let i = 0; i < vetfac.length; i++) {
+						console.log(posicao, '-', vetfac[i], '-', estousemcriativadade)
+						//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+						// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+						if (posicao <= vetfac[i] && estousemcriativadade == 0) {
+							console.log('Decil', vetDiscreta[i])
+							medidasTendeciaDiscreta.innerHTML += `Medida Separatriz: ${vetDiscreta[i]}<br>`
+							estousemcriativadade++
+						}
+					}
+				}
+
+			}
+			let posicao = 0 // nao sei se é nescessario mas vou deixar #vaiquebuga
+			// var pos = 0
+			if (value == 1) { //Medida separatriz:Quantil de 25 em 25%
+				let posicao = ((acum / 100)) + (25 * valorSeparatriz)
+				for (let i = 0; i < vetfac.length; i++) {
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (posicao <= vetfac[i] && estousemcriativadade == 0) {
+						console.log(posicao, '-', vetfac[i], '-', estousemcriativadade)
+						console.log(vetDiscreta[i])
+						medidasTendeciaDiscreta.innerHTML += `Medida Separatriz: ${indiceDiscreta[i]}<br>`
+						estousemcriativadade++
+					}
+				}
+			}
+			else if (value == 3) {// medida separatriz: quintil de 20 em 20 
+				let posicao = ((acum / 100) + (20 * valorSeparatriz))
+				for (let i = 0; i < vetfac.length; i++) {
+					console.log(1, '-', posicao, '-', vetfac[i], '-', estousemcriativadade)
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (posicao <= vetfac[i] && estousemcriativadade == 0) {
+						console.log('Quintil: ', indiceDiscreta[i])
+						medidasTendeciaDiscreta.innerHTML += `Medida Separatriz: ${indiceDiscreta[i]}<br>`
+						estousemcriativadade++
+					}
+				}
+
+			} else if (value == 4) { //medida separatriz: percentil
+				let posicao = porcentagem + Number(valorSeparatriz)
+				for (let i = 0; i < vetfac.length; i++) {
+					// console.log(1,'-',posicao, '-', vetfac[i], '-', estousemcriativadade)
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (posicao <= vetfac[i] && estousemcriativadade == 0) {
+						console.log(porcentagem, '*', valorSeparatriz, '=', posicao)
+						console.log('Percentil: ', vetDiscreta[i])
+						medidasTendeciaDiscreta.innerHTML += `Medida Separatriz: ${indiceDiscreta[i]}<br>`
+						estousemcriativadade++
+					}
+				}
+			}
+
+			//calculo da mediana 
+
+			//quando o valor de elementos inserido é par deve pegar o valor da posiçao do meio e a da frente somar e dividir por 2
+			if (acum % 2 == 0) {
+				let pos = acum / 2
+				// console.log("posiçoes: ", pos, ' - ', pos - 1)
+				posicao += Number(vetDiscreta[pos + 1])
+				posicao += Number(vetDiscreta[pos])
+				posicao = posicao / 2
+
+			} else {//se for inserido um valor impar TCHARAMMMM
+				let pos = Math.round(acum / 2)
+				posicao += Number(vetDiscreta[pos])
+			}
+			let totVariancia = 0
+			let media = (totMedia / acum).toFixed(1) // Calculo pra pegar o valor da media
+			medidasTendeciaDiscreta.innerHTML += `Média: ${media} <br> `
+			medidasTendeciaDiscreta.innerHTML += ` Mediana: ${posicao} <br>`
+			medidasTendeciaDiscreta.innerHTML += `Moda: ${maior}`
+			for (let i = 0; i < indiceDiscreta.length; i++) {
+				let calc = Math.pow((indiceDiscreta[i] - media), 2).toFixed(2)
+				let calc2 = Number(calc) * fiVariancia[i]
+				// calc2 = Number(calc2.toFixed(2))
+				console.log(i, ':', Number(calc), '*', fiVariancia[i], '=', calc2.toFixed(2))
+				totVariancia += Number(calc2)
+			}
+			if (amostraQuestion == 1) { facDiscreta-- }
+			console.log(facDiscreta)
+			let variancia = totVariancia / facDiscreta
+			variancia = Math.sqrt(variancia).toFixed(2)
+			medidasTendeciaDiscreta.innerHTML += `<br>Desvio Padrão: ${variancia}<br>`
+			console.log('Variancia: ', totVariancia, '/', facDiscreta, '=', variancia)
+			let cv = Number((variancia / Number(media)) * 100).toFixed(2)
+			console.log(variancia, '/', Number(media), '*', 100, ' =', cv)
+			medidasTendeciaDiscreta.innerHTML += `Coeficiente de Varianção: ${cv}<br>`
+			console.log("Raiz Quadrada: ", cv)
+
+			var color = []
+			for (let i = 0; i < indiceDiscreta.length; i++) {
+				let r = Math.floor(Math.random() * 255),
+					g = Math.floor(Math.random() * 255),
+					b = Math.floor(Math.random() * 255);
+				color.push(`rgb(${r},${g},${b})`)
+			}
+
+			// console.log(color)
+			var NOME_VARIAVEL = nomeVar //Nome da VARIAVEL (TABELO/GRAFICO
+			var VARIAVEL = indiceDiscreta // Dados que o usuário digitou
+			var DADOS = porcFreqDiscreta // FI%
+			var COR = color //geração de cores 
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: VARIAVEL, // Dados que o usuário digitou
+					datasets: [{
+						label: NOME_VARIAVEL,  //Nome da VARIAVEL (TABELO/GRAFICO
+						data: DADOS, // FI%
+						backgroundColor: COR,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					animation: {
+						duration: 3500,
+
+					},
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			});
+
+
+		}
+
+		function discreta(porcentagem, vetDiscreta) {
+
+			table_quali_disc.innerHTML += "<tr> <td>VARIAVEL</td><td>FI</td><td>FR%   </td><td>FAC   </td><td>FAC%  </td></tr> "
+			var value = document.getElementById('medidaSeparatriz').value;// pega qual medida separatriz sera consultada
+			var valorSeparatriz = document.getElementById('valorSeparatriz').value;//pega o valor da medida separatriz que ele quer pesquisae
+			var amostraQuestion = document.getElementById("PopAmosDiscreta").value;
+			var nomeVar = document.getElementById('nomeVar').value; //Coloca o nome da variavel
+			var dados = document.getElementById('dados').value; //puxa os dados da pagina
+			var vetDiscreta = dados.toString().split(';'); // separa os valores e insere no vetor
+			vetDiscreta.sort(ordemCrescente) // deixa o vetor na ordem crescente/alfabetica
+			var quantDados = {}; //obj com informando a quantidade de cada elemento 
+			var acum = 0; // acumulador de elementos diferentes
+
+			nome_quali_disc.innerHTML += nomeVar
+			for (let i = 0; i < vetDiscreta.length; i++) { //metodo para alocar a quantidade de cada elemento
+				if (quantDados[vetDiscreta[i]]) {
+					quantDados[vetDiscreta[i]] += 1
+					acum++
+
+				} else {
+					quantDados[vetDiscreta[i]] = 1
+					acum++
+
+				}
+			}
+			var porcentagem = (acum / 100) // valor de cada 1% sla pq mal usei ele
+			var facDiscreta = 0; // total de repetiçoes ate aquele momento fac
+			var acumFacDiscreta = 0; // acumulador da fac
+			var facTotPorcDisc = 0;// porcentagem total da fac
+			var facPorc = 0
+			//pega o valor da variavel 
+			var indiceDiscreta = [];
+			let totMedia = 0;  // valor total da media
+			var quant = 0// variavel para pegar o maior valor de repetiçoes no indice
+			//Pega a porcetagem do valor digitado
+			var porcFreqDiscreta = [];
+			var vetfac = []// vetor com todas os facs% 
+			var maior = []// vetor para pegar os maiores valores e fazer a moda
+			var estousemcriativadade = 0 // variavel p/ travar a busca de posicao na medida separatriz
+			let xiVariancia = []
+			let fiVariancia = []
+			for (var chave in quantDados) { // pega as variaveis
+				facDiscreta += quantDados[chave]
+				facPorc = Math.round((quantDados[chave] / acum) * 100) // calcula a porcentagem atual e nao sei pq nao o usei #vergonhadaprofision
+				facTotPorcDisc = facPorc + acumFacDiscreta
+				table_quali_disc.innerHTML += `<td> ${chave /*Inserção de variavel na tabela*/}  <td> ${quantDados[chave]/*Insere a quantidade de repetições da variavel*/} <td>${Math.round((quantDados[chave] / acum) * 100) /*Insere e calcula a porcentagem de vezes que o elemento foi inserido*/} % <td> ${facDiscreta}<td> ${facTotPorcDisc}<br> `
+				var Media = chave * quantDados[chave]
+				totMedia += Media  //adiciona o valor desse indice na media total
+				vetfac.push(facTotPorcDisc)//add fac% no vetor
+				fiVariancia.push(quantDados[chave])
+				acumFacDiscreta += facPorc
+				//Adiciona o indice ao vetor
+				indiceDiscreta.push(chave)
+				//adiciona a porcentagem ao vetor
+				porcFreqDiscreta.push(Math.round((quantDados[chave] / acum) * 100))
+				if (quant == quantDados[chave]) {//estrutura de selecao para descobrir se o indice atual é maior ou igual ao do vetor
+					//se for igual o adicionamos no vetor
+					quant = quantDados[chave]
+					// console.log(maior, chave)
+					maior.push(chave)
+				} else if (quant < quantDados[chave]) {
+					//senao excluimos o valor no vetor e adicionamos o novo valor
+					quant = quantDados[chave]
+					while (maior.length) {
+						maior.pop()
+					}
+
+					maior.push(chave)
+					console.log(maior)
+				}
+				if (value == 2) {
+					// medida separatriz: Decil de 10 em 10% a posiçao é o total de elementos dividido por 100 + a quantidade de decil 
+					//que o usuario deseja encontrar, isso é valido para todas as medidas separatrizes
+					estousemcriativadade = 0
+					let posicao = Math.round((acum / 100) + (10 * valorSeparatriz))
+					for (let i = 0; i < vetfac.length; i++) {
+						console.log(posicao, '-', vetfac[i], '-', estousemcriativadade)
+						//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+						// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+						if (posicao <= vetfac[i] && estousemcriativadade == 0) {
+							console.log(vetfac[i])
+							posicaoDecil = i
+							console.log('Decil', indiceDiscreta[i])
+							estousemcriativadade++
+						}
+					}
+
+				}
+
+			}
+			let posicao = 0 // nao sei se é nescessario mas vou deixar #vaiquebuga
+			// var pos = 0
+			if (value == 1) { //Medida separatriz:Quantil de 25 em 25%
+				let posicao = ((acum / 100)) + (25 * valorSeparatriz)
+				for (let i = 0; i < vetfac.length; i++) {
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (posicao <= vetfac[i] && estousemcriativadade == 0) {
+						console.log(posicao, '-', vetfac[i], '-', estousemcriativadade)
+						console.log(vetDiscreta[i])
+						medidasTendeciaDiscreta.innerHTML += `Medida Separatriz: ${indiceDiscreta[i]}<br>`
+						estousemcriativadade++
+					}
+				}
+			}
+			else if (value == 3) {// medida separatriz: quintil de 20 em 20 
+				let posicao = ((acum / 100) + (20 * valorSeparatriz))
+				for (let i = 0; i < vetfac.length; i++) {
+					console.log(1, '-', posicao, '-', vetfac[i], '-', estousemcriativadade)
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (posicao <= vetfac[i] && estousemcriativadade == 0) {
+						console.log('Quintil: ', indiceDiscreta[i])
+						medidasTendeciaDiscreta.innerHTML += `Medida Separatriz: ${indiceDiscreta[i]}<br>`
+						estousemcriativadade++
+					}
+				}
+
+			} else if (value == 4) { //medida separatriz: percentil
+				let posicao = porcentagem + Number(valorSeparatriz)
+				for (let i = 0; i < vetfac.length; i++) {
+					// console.log(1,'-',posicao, '-', vetfac[i], '-', estousemcriativadade)
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (posicao <= vetfac[i] && estousemcriativadade == 0) {
+						console.log(porcentagem, '*', valorSeparatriz, '=', posicao)
+						console.log('Percentil: ', vetDiscreta[i])
+						medidasTendeciaDiscreta.innerHTML += `Medida Separatriz: ${indiceDiscreta[i]}<br>`
+						estousemcriativadade++
+					}
+				}
+			}
+
+			//calculo da mediana 
+
+			//quando o valor de elementos inserido é par deve pegar o valor da posiçao do meio e a da frente somar e dividir por 2
+			if (acum % 2 == 0) {
+				let pos = acum / 2
+				console.log("posiçoes: ", pos, vetDiscreta[pos], ' - ', pos + 1, vetDiscreta[pos - 1])
+				posicao += Number(vetDiscreta[pos - 1])
+				posicao += Number(vetDiscreta[pos])
+				posicao = posicao / 2
+
+			} else {//se for inserido um valor impar TCHARAMMMM
+				let pos = Math.round(acum / 2)
+				posicao += Number(vetDiscreta[pos - 1])
+			}
+			let totVariancia = 0
+			let media = (totMedia / acum).toFixed(1) // Calculo pra pegar o valor da media
+			medidasTendeciaDiscreta.innerHTML += `Média: ${media} <br> `
+			medidasTendeciaDiscreta.innerHTML += ` Mediana: ${posicao} <br>`
+			medidasTendeciaDiscreta.innerHTML += `Moda: ${maior}`
+			if (value == 2) medidasTendeciaDiscreta.innerHTML += `Medida Separatriz: ${indiceDiscreta[posicaoDecil]}<br>`
+
+			for (let i = 0; i < indiceDiscreta.length; i++) {
+				let calc = Math.pow((indiceDiscreta[i] - media), 2).toFixed(2)
+				let calc2 = Number(calc) * fiVariancia[i]
+				// calc2 = Number(calc2.toFixed(2))
+				console.log(i, ':', Number(calc), '*', fiVariancia[i], '=', calc2.toFixed(2))
+				totVariancia += Number(calc2)
+			}
+			if (amostraQuestion == 1) { facDiscreta-- }
+			// console.log(facDiscreta)
+			let variancia = totVariancia / facDiscreta
+			variancia = Math.sqrt(variancia).toFixed(2)
+			medidasTendeciaDiscreta.innerHTML += `<br>Desvio Padrão: ${variancia}<br>`
+			// console.log('Variancia: ', totVariancia, '/', facDiscreta, '=', variancia)
+			let cv = Number((variancia / Number(media)) * 100).toFixed(2)
+			// console.log(variancia, '/', Number(media), '*', 100, ' =', cv)
+			medidasTendeciaDiscreta.innerHTML += `Coeficiente de Varianção: ${cv}<br>`
+			// console.log("Raiz Quadrada: ", cv)
+			var color = []
+			for (let i = 0; i < indiceDiscreta.length; i++) {
+				let r = Math.floor(Math.random() * 255),
+					g = Math.floor(Math.random() * 255),
+					b = Math.floor(Math.random() * 255);
+				color.push(`rgb(${r},${g},${b})`)
+			}
+
+			// console.log(color)
+			var NOME_VARIAVEL = nomeVar //Nome da VARIAVEL (TABELO/GRAFICO
+			var VARIAVEL = indiceDiscreta // Dados que o usuário digitou
+			var DADOS = porcFreqDiscreta // FI%
+			var COR = color //geração de cores 
+			var ctx = document.getElementById('myChart').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: VARIAVEL, // Dados que o usuário digitou
+					datasets: [{
+						label: NOME_VARIAVEL,  //Nome da VARIAVEL (TABELO/GRAFICO
+						data: DADOS, // FI%
+						backgroundColor: COR,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					animation: {
+						duration: 3500,
+
+					},
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			});
+
+
+		}
+
+		// -----------------------------------FIM Qualitativa ---------------------------------------------
+
+
+		//--------------------------------------- Nominal -------------------------------------------------
+
+		function calc_qualiNominal(vetNominalAuto) {
+			console.log("Nominal: ", vetAutoNominal)
+			table_Nominal.innerHTML = ""
+			nomeVariavel.innerHTML = ''
+			medidasTendeciaNominal.innerHTML = ''
+			var vetNominalAuto = []
+			for (let i = 0; i < vetAutoNominal; i++) {
+				vetNominalAuto[i] = vetAutoNominal[i]
+			}
+			if (vetAutoNominal.length == 0) {
+				nominal()
+			} else {
+				automaticaNominal()
+			}
+		}
+		function automaticaNominal(vetNominalAuto) {
+			console.log("NOMINAL:", vetNominalAuto)
+			console.log('2-NOMINAL:', vetAutoNominal)
+			table_Nominal.innerHTML += "<tr> <td>VARIAVEL</td><td>FI</td><td>FR%   </td><td>FAC   </td><td>FAC%  </td></tr> "
+			var nomeVar = document.getElementById('nomeVar_Nominal').value; //Coloca o nome da variavel
+			//	var dados_nominal = document.getElementById('dados_nominal').value; //puxa os dados da pagina
+			let vetNominal = vetAutoNominal.toString().split(','); // separa os valores e insere no vetor
+			var valueNominal = document.getElementById('medidaSeparatrizNominal').value; //pega qual medida separatriz sera pesquisada
+			var valorSeparatrizNominal = document.getElementById('valorSeparatrizNominal').value;//pega o valor que quer ser calculado
+			vetNominal.sort() // deixa o vetor na ordem crescente/alfabetica
+			var quantDados = {}; //obj com informando a quantidade de cada elemento 
+			var acum = 0; // acumulador de elementos diferentes
+			nomeVariavel.innerHTML += nomeVar
+			var maior = []
+			var quant = []
+			for (let i = 0; i < vetNominal.length; i++) { //metodo para alocar a quantidade de cada elemento
+				if (quantDados[vetNominal[i]]) {
+					quantDados[vetNominal[i]] += 1
+					acum++
+				} else {
+					quantDados[vetNominal[i]] = 1
+					acum++
+				}
+			}
+			var fac = 0; // total de repetiçoes ate aquele momento fac
+			var acumFac = 0;// acumulador da fac
+			var factotPorc = 0;// porcentagem total da fac
+			var acumFacPorc = 0;
+			//pega o valor da variavel 
+			var indiceNominal = [];
+			//Pega a porcetagem do valor digitado
+			var porcFreqNominal = [];
+			var vetfac = [] //vetor com os facs%
+			var nomeiodeumacrisecriativa = 0 //eu realmente estava NOMINAL de uma crise criativa
+			for (var chave in quantDados) { // pega as variaveis
+				fac += quantDados[chave]
+				facPorc = Math.round((quantDados[chave] / acum) * 100) // calcula a porcentagem atual e nao sei pq nao o usei #vergonhadaprofision
+				factotPorc = facPorc + acumFacPorc
+				table_Nominal.innerHTML += `<td> ${chave /*Inserção de variavel na tabela*/}  <td> ${quantDados[chave]/*Insere a quantidade de repetições da variavel*/} <td>${Math.round((quantDados[chave] / acum) * 100) /*Insere e calcula a porcentagem de vezes que o elemento foi inserido*/} % <td> ${fac}<td> ${factotPorc}  <br> `
+				acumFacPorc += facPorc
+				vetfac.push(factotPorc) //adiciana a porcentagem do fac no vetor
+				//Adicona o indice ao vetor
+				indiceNominal.push(chave)//adiciona o indice no vetor
+				// Adiciona a porcentagm ao vetor
+				porcFreqNominal.push(Math.round((quantDados[chave] / acum) * 100))
+				if (quant == quantDados[chave]) {//estrutura de selecao para descobrir se o indice atual é maior ou igual ao do vetor
+					//se for igual o adicionamos no vetor
+
+					quant = quantDados[chave]
+					console.log(maior, chave)
+					maior.push(chave)
+				} else if (quant < quantDados[chave]) {
+					//senao excluimos o valor no vetor e adicionamos o novo valor
+
+					quant = quantDados[chave]
+					maior.pop()
+
+					maior.push(chave)
+					console.log(maior)
+				}
+				if (valueNominal == 2) {
+					// medida separatriz: Decil de 10 em 10% a posiçao é o total de elementos dividido por 100 + a quantidade de decil 
+					//que o usuario deseja encontrar, isso é valido para todas as medidas separatrizes
+
+
+					let posicao = (acum / 100) + (10 * Number(valorSeparatrizNominal))
+					console.log(acum, valorSeparatrizNominal, posicao)
+					for (let i = 0; i < vetfac.length; i++) {
+						console.log(i, posicao, vetfac[i])
+						//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+						// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+						if (posicao <= vetfac[i] && nomeiodeumacrisecriativa == 0) {
+							console.log('Decil', vetNominal[i])
+							medidasTendeciaNominal.innerHTML += `Medida Separatriz: ${indiceNominal[i]}<br>`
+							nomeiodeumacrisecriativa++
+						}
+					}
+				}
+
+			}
+			let posicao = [] // posiçao das medianas
+			let porcentagem = acum / 100 //#vergonhadaprofission obs: caso nao tenha entendido volte na linha:533
+			if (valueNominal == 1) { //Medida separatriz:Quantil de 25 em 25%
+				let pos = porcentagem + (25 * Number(valorSeparatrizNominal))
+				console.log(pos)
+				console.log(vetNominal[pos - 1])
+				for (let i = 0; i < vetfac.length; i++) {
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (pos <= vetfac[i] && nomeiodeumacrisecriativa == 0) {
+						console.log(i, vetfac[i], pos)
+						medidasTendeciaNominal.innerHTML += `Medida Separatriz: ${vetNominal[i]} <br>`
+						nomeiodeumacrisecriativa++
+					}
+				}
+			}
+			else if (valueNominal == 3) { // medida separatriz: quintil de 20 em 20 
+				let posicao = (acum / 100) + (20 * Number(valorSeparatrizNominal))
+				// console.log(acum, valorSeparatrizNominal, posicao)
+				for (let i = 0; i < vetfac.length; i++) {
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (posicao <= vetfac[i] && nomeiodeumacrisecriativa == 0) {
+						console.log('Quintil', vetNominal[i])
+						medidasTendeciaNominal.innerHTML += `Medida Separatriz: ${indiceNominal[i]}<br>`
+						nomeiodeumacrisecriativa++
+
+					}
+				}
+			} else if (valueNominal == 4) { //medida separatriz: percentil
+				let pos = (acum / 100) + valorSeparatrizNominal
+				for (let i = 0; i < vetfac.length; i++) {
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (posicao <= vetfac[i] && nomeiodeumacrisecriativa == 0) {
+						console.log(porcentagem, '*', valorSeparatrizNominal, '=', posicao)
+						console.log('Percentil: ', indiceNominal[i])
+						medidasTendeciaNominal.innerHTML += `Medida Separatriz: ${indiceNominal[i]}<br>`
+					}
+				}
+			}
+			//calculo da mediana 
+
+			//quando o valor de elementos inserido é par deve pegar o valor da posiçao do meio e a da frente somar e dividir por 2
+			if (acum % 2 == 0) {
+				let pos = acum / 2
+				console.log("posiçoes: ", pos, ' - ', pos + 1)
+				posicao.push(vetNominal[pos - 1])
+				posicao.push(vetNominal[pos])
+
+			} else {//se for inserido um valor impar TCHARAMMMM
+				let pos = Math.round(acum / 2)
+				posicao.push(quantDados[vetNominal[pos]])
+			}
+			console.log('Media: Não tem 	')
+			console.log('Mediana: ', posicao)
+			console.log('moda: ', maior)
+			medidasTendeciaNominal.innerHTML += `Média: Não Tem <br> `
+			for (let i = 0; i < posicao.length; i++) {
+				medidasTendeciaNominal.innerHTML += ` Mediana: ${posicao[i]} <br>`
+			} if (maior == acum) {
+				medidasTendeciaNominal.innerHTML += 'Moda: Não Existe'
+			} else {
+				for (let i = 0; i < maior.length; i++) {
+					medidasTendeciaNominal.innerHTML += `Moda: ${maior[i]}<br>`
+				}
+			}
+			var color = []
+			for (let i = 0; i < indiceNominal.length; i++) {
+				let r = Math.floor(Math.random() * 255),
+					g = Math.floor(Math.random() * 255),
+					b = Math.floor(Math.random() * 255);
+				color.push(`rgb(${r},${g},${b})`)
+			}
+			// color.push(',')
+			//console.log(color)
+			var NOME_VARIAVEL = nomeVar //Nome da VARIAVEL (TABELO/GRAFICO
+			var VARIAVEL = indiceNominal // Dados que o usuário digitou
+			var DADOS = porcFreqNominal // FI%
+			var COR = color //geração de cores
+			var ctx = document.getElementById('myChart2').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'pie',
+				data: {
+					labels: VARIAVEL, // Dados que o usuário digitou
+					datasets: [{
+						label: NOME_VARIAVEL,  //Nome da VARIAVEL (TABELO/GRAFICO
+						data: DADOS, // FI%
+						backgroundColor: COR,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					animation: {
+						duration: 3500,
+
+					},
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			});
+		}
+		function nominal() {
+			table_Nominal.innerHTML += "<tr> <td>VARIAVEL</td><td>FI</td><td>FR%   </td><td>FAC   </td><td>FAC%  </td></tr> "
+			var nomeVar = document.getElementById('nomeVar_Nominal').value; //Coloca o nome da variavel
+			var valueNominal = document.getElementById('medidaSeparatrizNominal').value; //pega qual medida separatriz sera pesquisada
+			var valorSeparatrizNominal = document.getElementById('valorSeparatrizNominal').value; //pega o valor que quer ser calculado
+			var dados_nominal = document.getElementById('dados_nominal').value; //puxa os dados da pagina
+			let vetNominal = dados_nominal.toString().split(';'); // separa os valores e insere no vetor
+			vetNominal.sort() // deixa o vetor na ordem crescente/alfabetica
+			var quantDados = {}; //obj com informando a quantidade de cada elemento 
+			var acum = 0; // acumulador de elementos diferentes
+			nomeVariavel.innerHTML += nomeVar
+			for (let i = 0; i < vetNominal.length; i++) { //metodo para alocar a quantidade de cada elemento
+				if (quantDados[vetNominal[i]]) {
+					quantDados[vetNominal[i]] += 1
+					acum++
+				} else {
+					quantDados[vetNominal[i]] = 1
+					acum++
+				}
+			}
+			var vetfac = [] //vetor com os facs%
+			var fac = 0; // total de repetiçoes ate aquele momento fac
+			var acumFac = 0;// acumulador da fac
+			var factotPorc = 0;// porcentagem total da fac
+			var acumFacPorc = 0;
+			//pega o valor da variavel 
+			var indiceNominal = [];
+			//Pega a porcetagem do valor digitado
+			var porcFreqNominal = [];
+			var maior = []
+			var quant = []
+			var nomeiodeumacrisecriativa = 0 //eu realmente estava NOMINAL de uma crise criativa
+			for (var chave in quantDados) { // pega as variaveis
+				fac += quantDados[chave]
+				facPorc = Math.round((quantDados[chave] / acum) * 100)
+				factotPorc = facPorc + acumFacPorc
+				table_Nominal.innerHTML += `<td> ${chave /*Inserção de variavel na tabela*/}  <td> ${quantDados[chave]/*Insere a quantidade de repetições da variavel*/} <td>${Math.round((quantDados[chave] / acum) * 100) /*Insere e calcula a porcentagem de vezes que o elemento foi inserido*/} % <td> ${fac}<td> ${factotPorc}  <br> `
+				vetfac.push(factotPorc) //adiciana a porcentagem do fac no vetor
+				acumFacPorc += facPorc
+				//Adicona o indice ao vetor
+				indiceNominal.push(chave)
+				// Adiciona a porcentagm ao vetor
+				porcFreqNominal.push(Math.round((quantDados[chave] / acum) * 100))
+
+				if (quant == quantDados[chave]) {//estrutura de selecao para descobrir se o indice atual é maior ou igual ao do vetor
+					//se for igual o adicionamos no vetor
+
+					quant = quantDados[chave]
+					// console.log(maior, chave)
+					maior.push(chave)
+				} else if (quant < quantDados[chave]) {
+					//senao excluimos o valor no vetor e adicionamos o novo valor
+					quant = quantDados[chave]
+					while (maior.length) {
+						maior.pop()
+					}
+					maior.push(chave)
+					// console.log(maior)
+				}
+				if (valueNominal == 2) {	// medida separatriz: Decil de 10 em 10% a posiçao é o total de elementos dividido por 100 + a quantidade de decil 
+					//que o usuario deseja encontrar, isso é valido para todas as medidas separatrizes
+
+
+					let posicao = (acum / 100) + (10 * Number(valorSeparatrizNominal))
+					console.log(acum, valorSeparatrizNominal, posicao)
+					for (let i = 0; i < vetfac.length; i++) {
+						console.log(i, posicao, vetfac[i])
+						//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+						// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+						if (posicao <= vetfac[i] && nomeiodeumacrisecriativa == 0) {
+							console.log('Decil', vetNominal[i])
+							medidasTendeciaNominal.innerHTML += `Medida Separatriz: ${indiceNominal[i]}<br>`
+							nomeiodeumacrisecriativa++
+						}
+					}
+				}
+			}
+
+			let posicao = [] // posiçao das medianas
+			var pos = 0 //#vaiquebuga
+			var porcentagem = acum / 100 //#vergonhadaprofission obs: caso nao tenha entendido volte na linha:533
+			if (valueNominal == 1) {//Medida separatriz:Quantil de 25 em 25%
+				let pos = Math.round(porcentagem + (25 * Number(valorSeparatrizNominal)))
+				console.log(pos)
+				console.log(vetNominal[pos - 1])
+				for (let i = 0; i < vetfac.length; i++) {
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (pos <= vetfac[i] && nomeiodeumacrisecriativa == 0) {
+						console.log(i, vetfac[i], pos)
+						medidasTendeciaNominal.innerHTML += `Medida Separatriz: ${vetNominal[i]} <br>`
+						nomeiodeumacrisecriativa++
+					}
+				}
+			}
+			else if (valueNominal == 3) { // medida separatriz: quintil de 20 em 20 
+				let posicao = Math.round((acum / 100) + (20 * Number(valorSeparatrizNominal)))
+				// console.log(acum, valorSeparatrizNominal, posicao)
+				for (let i = 0; i < vetfac.length; i++) {
+					// console.log( posicao, vetfac[i])
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+
+					if (posicao <= vetfac[i] && nomeiodeumacrisecriativa == 0) {
+						console.log('Quintil', vetNominal[i])
+						medidasTendeciaNominal.innerHTML += `Medida Separatriz: ${indiceNominal[i]}<br>`
+						nomeiodeumacrisecriativa++
+
+					}
+				}
+			} else if (valueNominal == 4) { //medida separatriz: percentil
+				let pos = Math.round((acum / 100) + valorSeparatrizNominal)
+				for (let i = 0; i < vetfac.length; i++) {
+					// console.log( posicao, vetfac[i])
+					//percorrendo o vetor de facs% procuramos aonde a posição se encaixa e assim que a encaixamos pegamos o valor da posicao do vetor de indice 
+					// e travamos ela com o estousemcriativadade pq senao os facs seguintes tambem se encaixariam na busca ai sempre seria o ultimo valor
+					if (posicao <= vetfac[i] && nomeiodeumacrisecriativa == 0) {
+						console.log(porcentagem, '*', valorSeparatrizNominal, '=', posicao)
+						console.log('Percentil: ', indiceNominal[i])
+						medidasTendeciaNominal.innerHTML += `Medida Separatriz: ${indiceNominal[i]}<br>`
+					}
+				}
+			}
+			//calculo da mediana 
+
+			//quando o valor de elementos inserido é par deve pegar o valor da posiçao do meio e a da frente somar e dividir por 2
+
+			if (acum % 2 == 0) {
+				let pos = acum / 2
+				console.log("posiçoes: ", pos, ' - ', pos + 1)
+				posicao.push(vetNominal[pos - 1])
+				posicao.push(vetNominal[pos])
+
+			} else { //se for inserido um valor impar TCHARAMMMM
+				let pos = Math.round(acum / 2)
+				posicao.push(vetNominal[pos])
+			}
+			medidasTendeciaNominal.innerHTML += `Média:Não Tem <br> `
+			for (let i = 0; i < posicao.length; i++) {
+				medidasTendeciaNominal.innerHTML += `Mediana: ${posicao[i]} <br>`
+			}
+			for (let i = 0; i < maior.length; i++) {
+				medidasTendeciaNominal.innerHTML += `Moda: ${maior[i]}<br>`
+			}
+
+			var color = []
+			for (let i = 0; i < indiceNominal.length; i++) {
+				let r = Math.floor(Math.random() * 255),
+					g = Math.floor(Math.random() * 255),
+					b = Math.floor(Math.random() * 255);
+				color.push(`rgb(${r},${g},${b})`)
+			}
+			// color.push(',')
+			//console.log(color)
+			var NOME_VARIAVEL = nomeVar //Nome da VARIAVEL (TABELO/GRAFICO
+			var VARIAVEL = indiceNominal // Dados que o usuário digitou
+			var DADOS = porcFreqNominal // FI%
+			var COR = color //geração de cores
+			var ctx = document.getElementById('myChart2').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'pie',
+				data: {
+					labels: VARIAVEL, // Dados que o usuário digitou
+					datasets: [{
+						label: NOME_VARIAVEL,  //Nome da VARIAVEL (TABELO/GRAFICO
+						data: DADOS, // FI%
+						backgroundColor: COR,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					animation: {
+						duration: 3500,
+
+					},
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			});
+		}
+		//----------------------------------- FIM Nominal ---------------------------------------------------
+
+		//------------------------------------ Continua -----------------------------------------------------
+		function ordemCrescente(a, b) {
+			return (a - b)	// ordena de forma crescente
+		}
+
+		function calc_continua() {
+			table_continua.innerHTML = ""
+			nome_continua.innerHTML = ''
+			medidasTendeciaContinua.innerHTML = ''
+			// console.log(vetAutoContinua)
+			if (vetAutoContinua == 0) {
+				continua()
+			} else {
+				automaticaContinua()
+			}
+		}
+		function automaticaContinua() { //a continua é de chora né minha filha?
+			var vetDiscreta = vetAutoContinua.toString().split(','); // separa os valores e insere no vetor
+			table_continua.innerHTML += "<tr> <td>Coleta de dados </td><td>FI</td><td>FR%   </td><td>FAC   </td><td>FAC%  </td><td> XI</tr> "
+			var nomeVar = document.getElementById('nomeVar_Continua').value; //Coloca o nome da variavel
+			nome_continua.innerHTML += nomeVar
+			var valorcmb = document.getElementById('medidaSeparatrizContinua').value;
+			var valorContinua = document.getElementById('valorSeparatrizContinua').value;
+			// var dados_continua = document.getElementById('dados_continua').value; //puxa os dados da pagina
+			// let vetDiscreta = dados_continua.toString().split(';'); // separa os valores e insere no vetor
+			vetDiscreta.sort(ordemCrescente) // deixa o vetor na ordem crescente/alfabetica
+			let amostraQuestion = document.getElementById('PopAmos').value;
+			var n = vetDiscreta.length; // total de elementos 
+			var xmin = vetDiscreta[0]; // para pegar o menor valor do array
+			var xmax = vetDiscreta[n - 1]; // para pegar o maior valor do array
+			var quantDados = {};
+			var acum = 0;
+			var k = Math.sqrt(n).toFixed(0); // raiz quadrada dos elemnto
+
+			k = Math.floor(k) // aproximação de k para baixo
+			for (let i = 0; i < vetDiscreta.length; i++) { //metodo para alocar a quantidade de cada elemento
+				if (quantDados[vetDiscreta[i]]) {
+					quantDados[vetDiscreta[i]] += 1
+					acum++
+				} else {
+					quantDados[vetDiscreta[i]] = 1
+					acum++
+
+				}
+			}
+			let medianaPosicao = Math.round(acum / 2)
+			let pos = vetDiscreta[medianaPosicao - 1]
+			let pos1 = pos + 1
+			// console.log(medianaPosicao, pos)
+			var ic = 0; // ic = intervalo de classe
+			var alt = xmax - xmin //calculo feito para descobrir a amplitude
+			alt += 3
+			ic = Math.floor(alt / (k - 1)) //calculo feito para descobir quantos elementos pular ic=alt/k
+			var valorInicial = Number(xmin) - 1;
+			//pega o valor da variavel 
+			var indiceContinua = [];
+			//Pega a porcetagem do valor digitado
+			var porcFreqContinua = [];
+			var factotPorcContinua = 0;
+			var acumFacContinua = 0;
+			var facContinua = 0;
+			var tot = 0
+			var xi = 0
+			var YesorNot = 0
+			var maior = []
+			var valMaior = -1
+			var pontoMedio = 0
+			var xiVariancia = []
+			var fiVariancia = []
+			while (valorInicial <= xmax) {
+
+				var valorFinal = 0;
+				var cont = 0;
+				valorFinal = Number(valorInicial + ic)
+
+				if (valorFinal > xmax) {
+					valorFinal = Number(xmax) + 2
+				}
+
+				for (let i = 0; i < vetDiscreta.length; i++) {
+					if (vetDiscreta[i] >= valorInicial && vetDiscreta[i] <= valorFinal - 1) {
+						cont++
+						if (vetDiscreta[i] == vetDiscreta[medianaPosicao]) {
+							if (acum % 2 == 0) {
+								var limiteInferior = valorInicial
+								var facAnterior = facContinua
+								var limiteInferior1 = valorInicial
+								var facAnterior1 = facContinua
+								YesorNot = 2
+							} else {
+								YesorNot = 1
+								var limiteInferior = valorInicial
+								var facAnterior = facContinua
+							}
+						}
+
+					}
+
+				}
+
+				if (YesorNot == 1) {
+					var frSimples = cont
+					YesorNot = 0
+				} else if (YesorNot == 2) {
+					var frSimples = cont
+					var frSimples1 = cont
+					YesorNot = 0
+				}
+				// console.log(medianaPosicao + 1, '-', facAnterior1, frSimples1, ic)
+				var md = limiteInferior + ((medianaPosicao - facAnterior) / frSimples) * ic.toFixed(3)
+				var md1 = limiteInferior1 + ((medianaPosicao + 1 - facAnterior1) / frSimples1) * ic.toFixed(3)
+				// console.log(md, md1)
+
+				let facPorc = Math.round((cont / acum) * 100)
+				factotPorcContinua = facPorc + acumFacContinua
+
+
+				pontoMedio = (valorInicial + valorFinal) / 2
+				table_continua.innerHTML += `<td>${valorInicial} |--------${valorFinal}<td>${cont}<td>${Math.round((cont / acum) * 100)}<td>${facContinua}<td>${factotPorcContinua} <td>${pontoMedio}<br>`
+				let xi1 = ((valorInicial + valorFinal) / 2) * cont
+				xiVariancia.push(pontoMedio)
+				fiVariancia.push(cont)
+				xi += xi1
+				if (valMaior == cont) {
+					maior.push(pontoMedio)
+				}
+				else if (valMaior < cont) {
+					console.log(valMaior, '-', cont)
+					valMaior = cont
+					console.log(pontoMedio)
+					while (maior.length) {
+						maior.pop()
+					}
+					maior.push(pontoMedio)
+					console.log(maior)
+				}
+				//#REFERENCIAS
+				continuaSemcriatividade = 0
+				let posicao = acum / 4
+				console.log(valorcmb, valorContinua)
+				if (valorcmb == 1 && continuaSemcriatividade == 0) {// sim eu sei que da pra fazer em 5 linhas mas na hora estava com bloqueio criativo e agora estou com bloqueio de preguiça para mudar
+					if (valorContinua == 1) {
+						if (posicao >= facContinua && continuaSemcriatividade == 0) {
+							var q1 = valorInicial + ((posicao - facContinua) / cont) * ic
+							console.log(q1)
+							// medidasTendeciaContinua.innerHTML+=`Medida Separatriz: ${q1}<br>` 
+							continuaSemcriatividade++
+						}
+					}
+					if (valorContinua == 2) {
+						var q1 = md
+						// medidasTendeciaContinua.innerHTML+=`Medida Separatriz: ${md}<br>` 
+						continuaSemcriatividade++
+					}
+					if (valorContinua == 3) {
+						posicao = posicao * 3
+						if (posicao >= facContinua && continuaSemcriatividade == 0) {
+
+							console.log(valorInicial, posicao, facContinua, cont, ic)
+							var q1 = valorInicial + ((posicao - facContinua) / cont) * ic
+							// console.log(q3)
+							// medidasTendeciaContinua.innerHTML+=`Medida Separatriz: ${q3}`
+							continuaSemcriatividade++
+						}
+
+					} if (valorContinua == 4) {
+						posicao = posicao * 4
+						if (posicao >= facContinua && continuaSemcriatividade == 0) {
+
+							console.log(valorInicial, posicao, facContinua, cont, ic)
+							var q1 = valorInicial + ((posicao - facContinua) / cont) * ic
+							// console.log(q4)
+							// medidasTendeciaContinua+=`Medidas Separatriz: ${q4}`
+							continuaSemcriatividade++
+						}
+
+					}
+
+				}
+				let posicaoDecil = Math.round(acum / 10)
+				if (valorcmb == 2) {
+
+					let posicao = posicaoDecil * valorContinua
+					console.log(posicao)
+					if (posicao >= facContinua && continuaSemcriatividade == 0) {
+
+						let calcDecil = valorInicial + ((posicao - facContinua) / cont) * ic
+						console.log(valorInicial, posicao, facContinua, cont, ic)
+						continuaSemcriatividade++
+						console.log(calcDecil)
+						var q1 = calcDecil
+					}
+
+				}
+				let posicaoQuintil = Math.round(acum / 5)
+				if (valorcmb == 3) {
+					let posicao = posicaoQuintil * valorContinua
+					if (posicao >= facContinua && continuaSemcriatividade == 0) {
+						let calcQuintil = valorInicial + ((posicao - facContinua) / cont) * ic
+						continuaSemcriatividade++
+						console.log(calcQuintil)
+						var q1 = calcQuintil
+					}
+				}
+				let posicaoPorcentil = acum / 100
+				if (valorcmb == 4) {
+					let posicao = posicaoPorcentil * valorContinua
+					if (posicao >= facContinua && continuaSemcriatividade == 0) {
+						let calcPercentil = valorInicial + ((posicao - facContinua) / cont) * ic
+						continuaSemcriatividade++
+						console.log(calcPercentil)
+						var q1 = calcPercentil
+					}
+				}
+
+
+				facContinua += cont
+				acumFacContinua += facPorc
+				let indice = `${valorInicial} --- ${valorFinal}`
+				//Adiciona o indice ao vetor 
+				indiceContinua.push(indice)
+				//Adiciona a porcentagem ao vetor
+				porcFreqContinua.push(Math.round((cont / acum) * 100))
+				var valorInicial = valorFinal
+
+			}
+
+
+			var totVariancia = 0
+			let media = (xi / facContinua).toFixed(1)
+			var stop = 0
+			var quartilContinua = acum / 4
+			var decilContinua = acum / 10
+			medidasTendeciaContinua.innerHTML += `Medida Separatriz: ${q1}<br>`
+			medidasTendeciaContinua.innerHTML += `Média: ${media} <br> `
+
+			medidasTendeciaContinua.innerHTML += ` Mediana: ${md.toFixed(2)} <br>`
+			medidasTendeciaContinua.innerHTML += `Moda: ${maior}<br>`
+			console.log(xiVariancia)
+			console.log(fiVariancia)
+			for (let i = 0; i < xiVariancia.length; i++) {
+
+				let calc = Math.pow((xiVariancia[i] - media), 2).toFixed(2)
+				let calc2 = Number(calc) * fiVariancia[i]
+				// calc2 = Number(calc2.toFixed(2))
+				console.log(i, ':', Number(calc), '*', fiVariancia[i], '=', calc2.toFixed(2))
+				totVariancia += Number(calc2)
+
+			}
+			if (amostraQuestion == 1) { facContinua-- }
+			console.log(facContinua)
+			let variancia = totVariancia / facContinua
+			variancia = Math.sqrt(variancia).toFixed(2)
+			console.log('Variancia: ', totVariancia, '/', facContinua, '=', variancia)
+			medidasTendeciaContinua.innerHTML += `Desvio Padrão: ${variancia}<br>`
+			let cv = Number((variancia / Number(media)) * 100).toFixed(2)
+			console.log(variancia, '/', Number(media), '*', 100, ' =', cv)
+			medidasTendeciaContinua.innerHTML += `Coeficiente de Variação: ${cv}<br>`
+			console.log("Raiz Quadrada: ", cv)
+
+			var color = []
+			for (let i = 0; i < indiceContinua.length; i++) {
+				let r = Math.floor(Math.random() * 255),
+					g = Math.floor(Math.random() * 255),
+					b = Math.floor(Math.random() * 255);
+				color.push(`rgb(${r},${g},${b})`)
+			}
+
+			var COR = color // gera as cores do grafico
+			var NOME_VARIAVEL = nomeVar //Nome da VARIAVEL (TABELO/GRAFICO
+			var VARIAVEL = indiceContinua // Dados que o usuário digitou
+			var DADOS = porcFreqContinua // FI%
+
+			var ctx = document.getElementById('myChart3').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: VARIAVEL, // Dados que o usuário digitou
+					datasets: [{
+						label: NOME_VARIAVEL,  //Nome da VARIAVEL (TABELO/GRAFICO
+						data: DADOS, // FI%
+						backgroundColor: COR,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					animation: {
+						duration: 3500,
+
+					},
+					scales: {
+						xAxes: [{
+							display: false,
+							barPercentage: 1.3,
+							ticks: {
+								max: 3
+
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			});
+		}
+		function continua() { // bem vc nao vai acreditar mas a continua e literalmente a automaticacontinua so q puxando os valores da pagina nao de um csv
+			// console.log("entrou")
+			table_continua.innerHTML += "<tr> <td>Coleta de dados </td><td>FI</td><td>FR%   </td><td>FAC   </td><td>FAC%  </td><td> XI</tr> "
+			var nomeVar = document.getElementById('nomeVar_Continua').value; //Coloca o nome da variavel
+			nome_continua.innerHTML += nomeVar
+			var valorcmb = document.getElementById('medidaSeparatrizContinua').value;
+			var valorContinua = document.getElementById('valorSeparatrizContinua').value;
+			var dados_continua = document.getElementById('dados_continua').value; //puxa os dados da pagina
+			let vetDiscreta = dados_continua.toString().split(';'); // separa os valores e insere no vetor
+			vetDiscreta.sort(ordemCrescente) // deixa o vetor na ordem crescente/alfabetica
+			let amostraQuestion = document.getElementById('PopAmos').value;
+			var n = vetDiscreta.length; // total de elementos 
+			var xmin = vetDiscreta[0]; // para pegar o menor valor do array
+			var xmax = vetDiscreta[n - 1]; // para pegar o maior valor do array
+			var quantDados = {};
+			var acum = 0;
+			var k = Math.sqrt(n).toFixed(0); // raiz quadrada dos elemnto
+
+			k = Math.floor(k) // aproximação de k para baixo
+			for (let i = 0; i < vetDiscreta.length; i++) { //metodo para alocar a quantidade de cada elemento
+				if (quantDados[vetDiscreta[i]]) {
+					quantDados[vetDiscreta[i]] += 1
+					acum++
+				} else {
+					quantDados[vetDiscreta[i]] = 1
+					acum++
+
+				}
+			}
+			let medianaPosicao = Math.round(acum / 2)
+			let pos = vetDiscreta[medianaPosicao - 1]
+			let pos1 = pos + 1
+			// console.log(medianaPosicao, pos)
+			var ic = 0; // ic = intervalo de classe
+			var alt = xmax - xmin //calculo feito para descobrir a amplitude
+			alt += 3
+			ic = Math.floor(alt / (k - 1)) //calculo feito para descobir quantos elementos pular ic=alt/k
+			var valorInicial = Number(xmin) - 1;
+			//pega o valor da variavel 
+			var indiceContinua = [];
+			//Pega a porcetagem do valor digitado
+			var porcFreqContinua = [];
+			var factotPorcContinua = 0;
+			var acumFacContinua = 0;
+			var facContinua = 0;
+			var tot = 0
+			var xi = 0
+			var YesorNot = 0
+			var maior = []
+			var valMaior = -1
+			var pontoMedio = 0
+			var xiVariancia = []
+			var fiVariancia = []
+			while (valorInicial <= xmax) {
+
+				var valorFinal = 0;
+				var cont = 0;
+				valorFinal = Number(valorInicial + ic)
+
+				if (valorFinal > xmax) {
+					valorFinal = Number(xmax) + 2
+				}
+
+				for (let i = 0; i < vetDiscreta.length; i++) {
+					if (vetDiscreta[i] >= valorInicial && vetDiscreta[i] <= valorFinal - 1) {
+						cont++
+						if (vetDiscreta[i] == vetDiscreta[medianaPosicao]) {
+							if (acum % 2 == 0) {
+								var limiteInferior = valorInicial
+								var facAnterior = facContinua
+								var limiteInferior1 = valorInicial
+								var facAnterior1 = facContinua
+								YesorNot = 2
+							} else {
+								YesorNot = 1
+								var limiteInferior = valorInicial
+								var facAnterior = facContinua
+							}
+						}
+
+					}
+
+				}
+
+				if (YesorNot == 1) {
+					var frSimples = cont
+					YesorNot = 0
+				} else if (YesorNot == 2) {
+					var frSimples = cont
+					var frSimples1 = cont
+					YesorNot = 0
+				}
+				// console.log(medianaPosicao + 1, '-', facAnterior1, frSimples1, ic)
+				var md = limiteInferior + ((medianaPosicao - facAnterior) / frSimples) * ic.toFixed(3)
+				var md1 = limiteInferior1 + ((medianaPosicao + 1 - facAnterior1) / frSimples1) * ic.toFixed(3)
+				// console.log(md, md1)
+
+				let facPorc = Math.round((cont / acum) * 100)
+				factotPorcContinua = facPorc + acumFacContinua
+
+
+				pontoMedio = (valorInicial + valorFinal) / 2
+				table_continua.innerHTML += `<td>${valorInicial} |--------${valorFinal}<td>${cont}<td>${Math.round((cont / acum) * 100)}<td>${facContinua}<td>${factotPorcContinua} <td>${pontoMedio}<br>`
+				let xi1 = ((valorInicial + valorFinal) / 2) * cont
+				xiVariancia.push(pontoMedio)
+				fiVariancia.push(cont)
+				xi += xi1
+				if (valMaior == cont) {
+					maior.push(pontoMedio)
+				}
+				else if (valMaior < cont) {
+					console.log(valMaior, '-', cont)
+					valMaior = cont
+					while (maior.length) {
+						maior.pop()
+					}
+					maior.push(pontoMedio)
+					console.log(maior)
+				}
+				//#REFERENCIAS
+				continuaSemcriatividade = 0
+				let posicao = acum / 4
+				console.log(valorcmb, valorContinua)
+				if (valorcmb == 1 && continuaSemcriatividade == 0) {// sim eu sei que da pra fazer em 5 linhas mas na hora estava com bloqueio criativo e agora estou com bloqueio de preguiça para mudar
+					if (valorContinua == 1) {
+						if (posicao >= facContinua && continuaSemcriatividade == 0) {
+							var q1 = valorInicial + ((posicao - facContinua) / cont) * ic
+							console.log(q1)
+							// medidasTendeciaContinua.innerHTML+=`Medida Separatriz: ${q1}<br>` 
+							continuaSemcriatividade++
+						}
+					}
+					if (valorContinua == 2) {
+						var q1 = md
+						// medidasTendeciaContinua.innerHTML+=`Medida Separatriz: ${md}<br>` 
+						continuaSemcriatividade++
+					}
+					if (valorContinua == 3) {
+						posicao = posicao * 3
+						if (posicao >= facContinua && continuaSemcriatividade == 0) {
+
+							console.log(valorInicial, posicao, facContinua, cont, ic)
+							var q1 = valorInicial + ((posicao - facContinua) / cont) * ic
+							// console.log(q3)
+							// medidasTendeciaContinua.innerHTML+=`Medida Separatriz: ${q3}`
+							continuaSemcriatividade++
+						}
+
+					} if (valorContinua == 4) {
+						posicao = posicao * 4
+						if (posicao >= facContinua && continuaSemcriatividade == 0) {
+
+							console.log(valorInicial, posicao, facContinua, cont, ic)
+							var q1 = valorInicial + ((posicao - facContinua) / cont) * ic
+							// console.log(q4)
+							// medidasTendeciaContinua+=`Medidas Separatriz: ${q4}`
+							continuaSemcriatividade++
+						}
+
+					}
+
+				}
+				let posicaoDecil = Math.round(acum / 10)
+				if (valorcmb == 2) {
+
+					let posicao = posicaoDecil * valorContinua
+					console.log(posicao)
+					if (posicao >= facContinua && continuaSemcriatividade == 0) {
+
+						let calcDecil = valorInicial + ((posicao - facContinua) / cont) * ic
+						console.log(valorInicial, posicao, facContinua, cont, ic)
+						continuaSemcriatividade++
+						console.log(calcDecil)
+						var q1 = calcDecil
+					}
+
+				}
+				let posicaoQuintil = Math.round(acum / 5)
+				if (valorcmb == 3) {
+					let posicao = posicaoQuintil * valorContinua
+					if (posicao >= facContinua && continuaSemcriatividade == 0) {
+						let calcQuintil = valorInicial + ((posicao - facContinua) / cont) * ic
+						continuaSemcriatividade++
+						console.log(calcQuintil)
+						var q1 = calcQuintil
+					}
+				}
+				let posicaoPorcentil = acum / 100
+				if (valorcmb == 4) {
+					let posicao = posicaoPorcentil * valorContinua
+					if (posicao >= facContinua && continuaSemcriatividade == 0) {
+						let calcPercentil = valorInicial + ((posicao - facContinua) / cont) * ic
+						continuaSemcriatividade++
+						console.log(calcPercentil)
+						var q1 = calcPercentil
+					}
+				}
+
+
+				facContinua += cont
+				acumFacContinua += facPorc
+				let indice = `${valorInicial} --- ${valorFinal}`
+				//Adiciona o indice ao vetor 
+				indiceContinua.push(indice)
+				//Adiciona a porcentagem ao vetor
+				porcFreqContinua.push(Math.round((cont / acum) * 100))
+				var valorInicial = valorFinal
+
+			}
+
+
+			var totVariancia = 0
+			let media = (xi / facContinua).toFixed(1)
+			var stop = 0
+			var quartilContinua = acum / 4
+			var decilContinua = acum / 10
+			medidasTendeciaContinua.innerHTML += `Medida Separatriz: ${q1}<br>`
+			medidasTendeciaContinua.innerHTML += `Média: ${media} <br> `
+
+			medidasTendeciaContinua.innerHTML += ` Mediana: ${md.toFixed(2)} <br>`
+			medidasTendeciaContinua.innerHTML += `Moda: ${maior}<br>`
+			console.log(xiVariancia)
+			console.log(fiVariancia)
+			for (let i = 0; i < xiVariancia.length; i++) {
+
+				let calc = Math.pow((xiVariancia[i] - media), 2).toFixed(2)
+				let calc2 = Number(calc) * fiVariancia[i]
+				// calc2 = Number(calc2.toFixed(2))
+				console.log(i, ':', Number(calc), '*', fiVariancia[i], '=', calc2.toFixed(2))
+				totVariancia += Number(calc2)
+
+			}
+			if (amostraQuestion == 1) { facContinua-- }
+			console.log(facContinua)
+			let variancia = totVariancia / facContinua
+			variancia = Math.sqrt(variancia).toFixed(2)
+			console.log('Variancia: ', totVariancia, '/', facContinua, '=', variancia)
+			medidasTendeciaContinua.innerHTML += `Desvio Padrão: ${variancia}<br>`
+			let cv = Number((variancia / Number(media)) * 100).toFixed(2)
+			console.log(variancia, '/', Number(media), '*', 100, ' =', cv)
+			medidasTendeciaContinua.innerHTML += `Coeficiente de Variação: ${cv}<br>`
+			console.log("Raiz Quadrada: ", cv)
+
+			var color = []
+			for (let i = 0; i < indiceContinua.length; i++) {
+				let r = Math.floor(Math.random() * 255),
+					g = Math.floor(Math.random() * 255),
+					b = Math.floor(Math.random() * 255);
+				color.push(`rgb(${r},${g},${b})`)
+			}
+
+			var COR = color // gera as cores do grafico
+			var NOME_VARIAVEL = nomeVar //Nome da VARIAVEL (TABELO/GRAFICO
+			var VARIAVEL = indiceContinua // Dados que o usuário digitou
+			var DADOS = porcFreqContinua // FI%
+
+			var ctx = document.getElementById('myChart3').getContext('2d');
+			var myChart = new Chart(ctx, {
+				type: 'bar',
+				data: {
+					labels: VARIAVEL, // Dados que o usuário digitou
+					datasets: [{
+						label: NOME_VARIAVEL,  //Nome da VARIAVEL (TABELO/GRAFICO
+						data: DADOS, // FI%
+						backgroundColor: COR,
+						borderWidth: 1
+					}]
+				},
+				options: {
+					animation: {
+						duration: 3500,
+
+					},
+					scales: {
+						xAxes: [{
+							display: false,
+							barPercentage: 1.3,
+							ticks: {
+								max: 3
+
+							}
+						}],
+						yAxes: [{
+							ticks: {
+								beginAtZero: true
+							}
+						}]
+					}
+				}
+			});
+		}
+// --------------------------------FIM Continua -----------------------------------------------------
+
+//---------------------------------- GRAFICO -----------------------------
+
+	</script>
+</body>
+
+</html>
